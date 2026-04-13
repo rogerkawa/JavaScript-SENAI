@@ -2,11 +2,11 @@
 let nome1 = prompt('Digite o nome do seu personagem: ')
 let poder1 = +prompt ('Digite o poder de seu personagem de 0 a 100! ')
 
-if (poder1 > 100 || poder1 <= 0){
+while(poder1 > 100 || poder1 <= 0){
     alert('Digite um valor válido!')
-}else{
-    alert(`Bem vindo ${nome1} o seu poder é de ${poder1}`)
+    poder1 = +prompt('Digite o poder de seu personagem de 0 a 100!')
 }
+    alert(`Bem vindo ${nome1} o seu poder é de ${poder1}`)
 
 //jogador2 defesa
 let vidaPersonagem = 70
