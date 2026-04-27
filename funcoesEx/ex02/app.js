@@ -1,8 +1,4 @@
-let opcoes = +prompt(`
-    O que você deseja ver:
-1- Calcular salário líquido
-2- Exibir resumo do cálculo
-3- Sair`)
+let opcoes = ''
 
 let desconto = 0
 let hTrabalhadas = 0
@@ -12,6 +8,13 @@ let salarioLiquido = 0
 let vale = 0
 let bonus = 0
 let salarioBruto = 0
+while(opcoes != 3){
+    opcoes = +prompt(`
+    O que você deseja ver:
+1- Calcular salário líquido
+2- Exibir resumo do cálculo
+3- Sair`)
+
 function salario(){
 
     vHora = +prompt('Digite o valor que recebes por hora trabalhada: ')
@@ -47,17 +50,16 @@ function resumo(){
         Bônus : ${bonus}
         Salário Líquido: ${salarioLiquido}`)
     }
-function sair(){
-        window.close()
-    }
-    
+
+
     if(opcoes == 1){
         salario()
     }else if(opcoes == 2){
         resumo()
     }else if(opcoes ==3){
-        sair()
+        break;
     }
+}
 
 
 
