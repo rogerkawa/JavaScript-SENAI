@@ -1,5 +1,14 @@
 
-let opcoes = +prompt(`
+let opcoes = ''
+
+    let a
+    let b
+    let l
+    let bMaior
+    let bMenor
+    let r
+    while(opcoes != 6){
+        opcoes = +prompt(`
     Escolha a opção que deseja:
     1- área do triângulo
     2- área do retângulo
@@ -8,13 +17,9 @@ let opcoes = +prompt(`
     5- área do círculo
     6- Sair
     `)
-
-    let a
-    let b
-    let l
-    let bMaior
-    let bMenor
-    let r
+    if(opcoes == 6){
+        break;
+    }
     switch(opcoes){
         case 1:
             b = +prompt('Digite a base')
@@ -39,9 +44,6 @@ let opcoes = +prompt(`
         case 5:
             r = +prompt('Digite o tamanho do raio da circunferência')
             circulo(3.14,r)
-            break;
-        case 6:
-            window.close()
             break;
         default:
             alert('Opção Inválida')
@@ -72,3 +74,4 @@ function circulo(pi,r){
     alert(`
         área do circulo: ${result}`)
 }
+    }
