@@ -4,6 +4,7 @@ let a = 0
 let b = 0
 let c = 0
 let branco = 0
+let totalV = 0
 while(votos != 4){
 votos = +prompt(`
 1-Votar
@@ -23,19 +24,37 @@ function votar(){
         `)
         if(cont == 1){
             a++
+            totalV++
         }else if(cont==2){
             b++
+            totalV++
         }else if(cont==3){
             c++
+            totalV++
         }else if(cont==4){
             branco++
+            totalV++
         }else{
             alert('Digite um número válido')
         }
-
 }
 
-let totalV= 0
+
+
+let porcentagemA = 0
+let porcentagemB = 0
+let porcentagemC = 0
+let porcentagemBranco = 0
+function percentual(){
+    porcentagemA = (a / totalV)*100
+    porcentagemB = (b / totalV)*100
+    porcentagemC = (c / totalV)*100
+    porcentagemBranco = (branco / totalV)*100
+    
+    console.log("Resultado:", porcentagemA, porcentagemB, porcentagemC, porcentagemBranco);
+}
+percentual()
+
 let vencedor = ''
 
 function result(){
@@ -50,10 +69,12 @@ function result(){
     }
     alert(`
         Resultado da votação:
-        Votos no a : ${a}
-        Votos no b : ${b}
-        Votos no c : ${c}
-        Vencedor : ${vencedor}`)
+        Votos no a : ${a}                   Percentual: ${porcentagemA.toFixed('2')}
+        Votos no b : ${b}                   Percentual: ${porcentagemB.toFixed('2')}
+        Votos no c : ${c}                   Percentual: ${porcentagemC.toFixed('2')}
+        Votos em branco : ${branco}         Percentual: ${porcentagemBranco.toFixed('2')}
+        Vencedor : ${vencedor}
+        Total de votos: ${totalV} votos`)
         
 }
 
