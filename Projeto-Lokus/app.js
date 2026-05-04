@@ -2,14 +2,18 @@ let title = document.querySelector('.app__title')
 let body = document.querySelector('body')
 let image = document.querySelector('.app__image')
 
+
 //descanso curto
 let dCurto = document.querySelector('.dCurto')
 dCurto.addEventListener('click', descansoCurto)
 
 function descansoCurto(){
-    title.innerText = 'Descanso curto ativado'
+    title.innerHTML = "Foque no que gera resultado, <strong style='font-weight: bold;'>deixe o resto em segundo plano.</strong>"
     body.style.background = 'linear-gradient(180deg, #0F725C 0%, #041832 48.44%, #01080E 100%)'
     image.src = 'imagens/descanso-curto.png' //altera o caminho da imagem
+    dCurto.classList.add('active')
+    foco.classList.remove('active')
+    dLongo.classList.remove('active')
 }
 
 
@@ -17,9 +21,12 @@ function descansoCurto(){
 let foco = document.querySelector('.active')
 foco.addEventListener('click', focoActive)
 function focoActive(){
-    title.innerText = 'Otimize sua produtividade, mergulhe no que importa.'
+    title.innerHTML = "Otimize sua produtividade, <strong style='font-weight: bold;'> mergulhe no que importa.</strong>"
     body.style.background = 'linear-gradient(180deg, #8B1FF8 0%, #041832 48.44%, #01080E 100%)'
     image.src = 'imagens/foco.png'
+    dCurto.classList.remove('active')
+    foco.classList.add('active')
+    dLongo.classList.remove('active')
 }
 
 //descanso longo
@@ -27,7 +34,10 @@ let dLongo = document.querySelector('.dLongo')
 dLongo.addEventListener('click' , descansoLongo)
 
 function descansoLongo(){
-    title.innerText = 'Descanso longo Ativado'
+    title.innerHTML = "Elimine distrações, <strong style='font-weight: bold;'>concentre sua energia no essencial.</strong>"
     body.style.background = 'linear-gradient(180deg, #1875E9 0%, #041832 48.44%, #01080E 100%)'
     image.src = 'imagens/descanso-longo.png'
+    dCurto.classList.remove('active')
+    foco.classList.remove('active')
+    dLongo.classList.add('active')
 }
