@@ -1,8 +1,17 @@
 .conteudo{
-    display: none;
+    opacity: 0.3;
+    transition: 0.5s;
+}
+.conteudo:hover{
+    transform: scale(0.8);
 }
 .conteudo-ativo{
     display: block;
+    opacity: 1;
+    transition: 0.5s;
+}
+.conteudo-ativo:hover{
+    transform: scale(1.08);
 }
 *{
     margin: 0;
@@ -28,7 +37,7 @@ body{
     gap: 20px;
 }
 div:not(.container,.botoes){
-    box-shadow: 2px 2px 2px;
+    border: 1px solid;
 }
 button{
     padding: 10px;
