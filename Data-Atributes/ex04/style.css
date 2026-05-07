@@ -1,0 +1,38 @@
+.conteudo{
+    display: none;
+}
+.conteudo-ativo{
+    display: block;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    height: 20vh;
+    gap: 20px;
+}
+.botoes{
+    display: flex;
+    margin-top: 30px;
+    gap: 20px;
+}
+div:not(.container,.botoes){
+    box-shadow: 2px 2px 2px;
+}
+button{
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid;
+    cursor: pointer;
+}

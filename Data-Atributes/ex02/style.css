@@ -1,0 +1,33 @@
+[data-cor="red"]{
+    background-color: red;
+}
+[data-cor="blue"]{
+    background-color: blue;
+}
+[data-cor="green"]{
+    background-color: green;
+}
+[data-cor="branco"]{
+    background-color: white;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 20px;
+}
+button{
+    padding: 20px;
+    width: 15vw;
+    border-radius: 15px;
+    border: 2px solid;
+    cursor: pointer;
+}
