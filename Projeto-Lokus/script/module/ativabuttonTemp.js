@@ -1,5 +1,5 @@
 export default function initButtonTemp(){
-    const banner = document.querySelector('.app__image')
+const banner = document.querySelector('.app__image')
 const titulos = document.querySelector('.app__title')
 const html = document.documentElement /* Trazendo elemento html fora do body */
 const botoes = document.querySelectorAll('.app__card-button[data-contexto]')
@@ -23,37 +23,48 @@ function alterarConteudos(contexto, botaoClicado){
     // Atualizando o data-contexto
     html.dataset.contexto = contexto  //recebe o valor do data-contexto atual e altera a pagina
 
+    //Botao de reset
+const resetButton = document.getElementById('resetButton')
+resetButton.addEventListener('click', ()=>{
+    if(contexto == 'foco'){
+        tempoDecorrido = 5
+    }else if(contexto == 'descanso-curto'){
+        tempoDecorrido = 10
+    }else if(contexto == 'descanso-longo'){
+        tempoDecorrido = 15
+    }
+    imageBotao.src = 'imagens/play_arrow.png'
+    btnInicioPause.innerText = 'Iniciar'
+    mostrarTimer()
+    rodando = false
+    paraTimer()
+})
+
+const select = document.querySelector('.txtSelect')
+
     banner.src = `imagens/${contexto}.png`
     switch(contexto){
         case 'foco':
-            tempoDecorrido = 10
+            tempoDecorrido = 5
             mostrarTimer()
+            select.style.display = 'none'
             titulos.innerHTML = "Otimize sua produtividade, <strong style='font-weight: bold;'> mergulhe no que importa.</strong>"
             break;
 
         case 'descanso-curto':
-            tempoDecorrido = 15
+            tempoDecorrido = 10
             mostrarTimer()
+            select.style.display = 'none'
             titulos.innerHTML = "Foque no que gera resultado, <strong style='font-weight: bold;'>deixe o resto em segundo plano.</strong>"
             break;
 
         case 'descanso-longo':
-            tempoDecorrido = 20
+            tempoDecorrido = 15
             mostrarTimer()
+            select.style.display = 'none'
             titulos.innerHTML = "Elimine distrações, <strong style='font-weight: bold;'>concentre sua energia no essencial.</strong>"
             break;
     }
-    //meu método
-    /* if(contexto == 'descanso-curto'){
-        titulos.innerHTML = "Foque no que gera resultado, <strong style='font-weight: bold;'>deixe o resto em segundo plano.</strong>"
-        banner.src = 'imagens/descanso-curto.png' //altera o caminho da imagem
-    }else if(contexto == 'descanso-longo'){
-        titulos.innerHTML = "Elimine distrações, <strong style='font-weight: bold;'>concentre sua energia no essencial.</strong>"
-        banner.src = 'imagens/descanso-longo.png'
-    }else if(contexto == 'foco'){
-        titulos.innerHTML = "Otimize sua produtividade, <strong style='font-weight: bold;'> mergulhe no que importa.</strong>"
-        banner.src = 'imagens/foco.png'
-    } */
     
 }
 
@@ -62,7 +73,7 @@ const exibirTimerApp = document.getElementById('timer')
 
 const btnStart = document.getElementById('start-pause')
 // Variável de ref para guardar o timer
-let tempoDecorrido = 10
+let tempoDecorrido = 5
 
 let modulo = document.querySelector('.modal')
 
@@ -73,14 +84,19 @@ function mostrarTimer(){
     exibirTimerApp.innerHTML = `${tempoFormatado}`
 }
 mostrarTimer()
-btnStart.addEventListener('click', iniciarTimer)
+
+btnStart.addEventListener('click', iniciarPausaTimer)
+
+const som = new Audio('sons/beep.mp3')
 function decrementarTimer(){
-    const som = new Audio('sons/beep.mp3')
     if(tempoDecorrido <= 0){
         som.play()
+        imageBotao.src = 'imagens/play_arrow.png'
+        btnInicioPause.innerText = 'Iniciar'
+        mostrarTimer()
         /* setTimeout(()=>{alert('Tempo esgotado')}, 100) */
-        pararTimer()
-        modulo.style.display = 'block'
+        paraTimer()
+        modulo.style.display = 'flex'
         return
     }
     
@@ -89,117 +105,36 @@ function decrementarTimer(){
     
 }
 
-
-//Botao de reset
-const resetButton = document.getElementById('resetButton')
-resetButton.addEventListener('click', ()=>{
-    tempoDecorrido = 10
-    rodando = false
-    pararTimer()
-})
-
-
 let idTimer
 let rodando = false
+const imageBotao = document.querySelector('.app__card-primary-butto-icon')
+const btnInicioPause = document.querySelector('.app__card-primary-button span')
 function iniciarPausaTimer(){
-    
-    const btnInicioPause = document.querySelector('.app__card-primary-button span')
     const audioIniciar = new Audio('sons/play.wav')
     const audioPausar = new Audio('sons/pause.mp3')
-    if(rodando){
-        btnInicioPause.innerText = 'Iniciar'
-        audioPausar.play()
-        pararTimer()
-        return
-    }
-    btnInicioPause.innerText = 'Pausar'
-    audioIniciar.play()
-    idTimer = setInterval(decrementarTimer, 1000)
-    rodando = true
-}
-
-function iniciarTimer(){
     if (rodando) {
-        pararTimer()
-        return
+            imageBotao.src = 'imagens/play_arrow.png'
+            btnInicioPause.innerText = 'Iniciar'
+            audioPausar.play()
+            paraTimer()
+            return
+        }
+        imageBotao.src = 'imagens/pause.png'
+        btnInicioPause.innerText = 'Pausar'
+        audioIniciar.play()
+        idTimer = setInterval(decrementarTimer, 1000)
+        rodando = true
     }
-    idTimer = setInterval(decrementarTimer, 1000)
-    rodando = true
-    btnStart.innerHTML = '<img src="imagens/pause.png"><span>Pausar</span>'
-}
 
-function pararTimer(){
+function paraTimer(){
     clearInterval(idTimer)
     rodando = false
-    btnStart.innerHTML = '<img src="imagens/play_arrow.png"><span>Começar</span>'
 }
 
-
+//fechar modulo
 let buttonModulo = document.getElementById('buttonModule')
 buttonModulo.addEventListener('click', ()=>{
     modulo.style.display = 'none'
+    som.pause()
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//meu código
-
-/* let title = document.querySelector('.app__title')
-let body = document.querySelector('body')
-let image = document.querySelector('.app__image')
-
-
-//descanso curto
-let dCurto = document.querySelector('.dCurto')
-dCurto.addEventListener('click', descansoCurto)
-
-
-function descansoCurto(){
-    title.innerHTML = "Foque no que gera resultado, <strong style='font-weight: bold;'>deixe o resto em segundo plano.</strong>"
-    body.style.background = 'linear-gradient(180deg, #0F725C 0%, #041832 48.44%, #01080E 100%)'
-    image.src = 'imagens/descanso-curto.png' //altera o caminho da imagem
-    dCurto.classList.add('active')
-    foco.classList.remove('active')
-    dLongo.classList.remove('active')
-}
-
-
-//foco
-let foco = document.querySelector('.active')
-foco.addEventListener('click', focoActive)
-
-function focoActive(){
-    title.innerHTML = "Otimize sua produtividade, <strong style='font-weight: bold;'> mergulhe no que importa.</strong>"
-    body.style.background = 'linear-gradient(180deg, #8B1FF8 0%, #041832 48.44%, #01080E 100%)'
-    image.src = 'imagens/foco.png'
-    dCurto.classList.remove('active')
-    foco.classList.add('active')
-    dLongo.classList.remove('active')
-}
-
-//descanso longo
-let dLongo = document.querySelector('.dLongo')
-dLongo.addEventListener('click' , descansoLongo)
-
-
-function descansoLongo(){
-    title.innerHTML = "Elimine distrações, <strong style='font-weight: bold;'>concentre sua energia no essencial.</strong>"
-    body.style.background = 'linear-gradient(180deg, #1875E9 0%, #041832 48.44%, #01080E 100%)'
-    image.src = 'imagens/descanso-longo.png'
-    dCurto.classList.remove('active')
-    foco.classList.remove('active')
-    dLongo.classList.add('active')
-} */
-
 }
