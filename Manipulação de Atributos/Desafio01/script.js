@@ -1,7 +1,9 @@
 const input = document.querySelector('[type="password"]')
-const inputao = document.querySelector('#senha')
 const buttonType = document.getElementById('view')
 const img = document.querySelector('#eyes')
+
+buttonType.style.display = 'none'
+
 
 
 buttonType.addEventListener('click', ()=>{
@@ -15,8 +17,11 @@ buttonType.addEventListener('click', ()=>{
     }
     
 })
-if(inputao.value.length == 0){
+
+input.addEventListener('input', ()=>{
+    if(input.value.length <= 0){
         buttonType.style.display = 'none'
     }else{
         buttonType.style.display = 'block'
     }
+})
